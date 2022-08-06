@@ -101,3 +101,20 @@ describe('Extend expect function', () => {
     expect(user).toMatchJsonPath('$.name')
   })
 })
+
+describe('mock', () => {
+  it('create a callable function', () => {
+    const mock = jest.fn()
+    mock('Juntao')
+    expect(mock).toHaveBeenCalled()
+    expect(mock).toHaveBeenCalledWith('Juntao')
+    expect(mock).toHaveBeenCalledTimes(1)
+  })
+
+  it('mock iplementation', () => {
+    const fakeAdd = jest.fn().mockImplementation((a: number, b: number) => 5)
+
+    expect(fakeAdd(1, 1)).toBe(5)
+    expect(fakeAdd).toHaveBeenCalledWith(1, 1)
+  })
+})
