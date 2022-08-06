@@ -1,3 +1,4 @@
+import jsonpath from 'jsonpath'
 import { add } from './calc'
 
 describe('calculator', () => {
@@ -73,5 +74,30 @@ describe('Matchers for Array and Object', () => {
     })
 
     expect(user).toEqual(matcher)
+  })
+})
+
+describe('Extend expect function', () => {
+  const toMatchJsonPath = (received: any, argument: string) => {
+    const result = jsonpath.query(received, argument)
+
+    if (result.length > 0) {
+      return {
+        pass: true,
+        message: () => 'matched'
+      }
+    } else {
+      return {
+        pass: false,
+        message: () => `expected ${JSON.stringify(received)} to match json path ${argument}`
+      }
+    }
+  }
+  expect.extend({ toMatchJsonPath })
+
+  it('matches jsonpath', () => {
+    const user = { name: 'Juntao' }
+
+    expect(user).toMatchJsonPath('$.name')
   })
 })
