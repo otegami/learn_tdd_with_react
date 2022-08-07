@@ -130,3 +130,24 @@ describe('mock API call', () => {
     expect(global.fetch).toHaveBeenCalledWith('http://localhost:4000/users/111')
   })
 })
+
+// Chapter3
+describe('addtion', () => {
+  it('return 5 when adding 2 and 3', () => {
+    const a = 2, b = 3
+    const result = add(a, b)
+    expect(result).toEqual(5)
+  })
+
+  it('return 6 when adding 2 and 4', () => {
+    const a = 2, b = 4
+    const result = add(a, b)
+    expect(result).toEqual(6)
+  })
+
+  it('return 7 when adding 3 and 4', () => {
+    const a = 3, b = 4
+    const result = add(a, b)
+    expect(result).toEqual(7)
+  })
+})
