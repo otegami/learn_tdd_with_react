@@ -1,4 +1,5 @@
 import jsonpath from 'jsonpath'
+import { fetchUser } from './api/user'
 import { add } from './calc'
 
 describe('calculator', () => {
@@ -116,5 +117,16 @@ describe('mock', () => {
 
     expect(fakeAdd(1, 1)).toBe(5)
     expect(fakeAdd).toHaveBeenCalledWith(1, 1)
+  })
+})
+
+describe('mock API call', () => {
+  const user = { name: 'Juntao' }
+
+  it('mock fetch', () => {
+    global.fetch = jest.fn().mockImplementation(() => Promise.resolve({ user }))
+
+    fetchUser(111).then(x => console.log(x))
+    expect(global.fetch).toHaveBeenCalledWith('http://localhost:4000/users/111')
   })
 })
