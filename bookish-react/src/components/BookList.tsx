@@ -1,4 +1,4 @@
-type Book = {
+export type Book = {
   name: string
 }
 

@@ -1,11 +1,19 @@
 import Typography from '@material-ui/core/Typography'
-import BookList from './components/BookList'
+import BookList, { Book } from './components/BookList'
+import axios, { AxiosResponse } from 'axios'
+import { useEffect, useState } from 'react'
 
 const App = () => {
-  const books = [
-    { name: "Refactoring" },
-    { name: "Domain-driven design" }
-  ]
+  const [books, setBooks] = useState<Book[]>([])
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const res: AxiosResponse<Book[]> = await axios.get('http://localhost:8080/books')
+      setBooks(res.data)
+    }
+
+    fetchBooks()
+  }, [])
 
   return (
     <div className='App'>
@@ -17,4 +25,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App
