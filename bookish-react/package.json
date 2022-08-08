@@ -23,7 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "e2e": "cypress run"
+    "e2e": "cypress run",
+    "stub-server": "json-server --watch db.json --port 8080"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^10.4.0"
+    "cypress": "^10.4.0",
+    "json-server": "^0.17.0"
   }
 }
