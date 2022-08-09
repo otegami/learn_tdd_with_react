@@ -10,6 +10,7 @@
       "node"
     ]
   },
+  "moduleResolution": "node",
   "include": [
     "**/*.ts"
   ]
