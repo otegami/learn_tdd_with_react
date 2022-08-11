@@ -13,7 +13,7 @@ export const useBookList = (initial: Book[]) => {
       setLoading(true)
 
       try {
-        const res: AxiosResponse<Book[], unknown> = await axios('http://localhost:8080/books')
+        const res: AxiosResponse<Book[], unknown> = await axios('http://localhost:8080/books?_sort=id&_order=asc')
         setBooks(res.data)
       } catch (e) {
         setError(true)

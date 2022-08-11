@@ -16,8 +16,9 @@ const BookList: React.FC<Props> = ({ books, loading, error }) => {
   return (
     <div data-test="book-list">
       {books.map((book) => (
-        <div className="book-item" key={book.id}>
+        <div className="book-item" key={book.id} data-test={`book-item-${book.id}`}>
           <h2 className="title">{book.name}</h2>
+          <a href={`/books/${book.id}`}>View Details</a>
         </div>
       ))}
     </div>
