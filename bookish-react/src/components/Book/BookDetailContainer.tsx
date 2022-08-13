@@ -1,24 +1,13 @@
-import axios, { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Book } from "../BookList/BookList";
+import { useBook } from "./BookDetail.hooks";
+import BookDetail from "./BookDetail";
 
 const BookDetailContainer: React.FC = () => {
   const { id } = useParams<{ id: string }>()
-  const [book, setBook] = useState<Book>({ id: 0, name: '' })
-
-  useEffect(() => {
-    if (!id) return
-    const fetchBook = async () => {
-      const book = await axios.get(`http://localhost:8080/books/${id}`)
-      setBook(book.data)
-    }
-
-    fetchBook()
-  }, [id])
+  const { book, loading, error } = useBook(id)
 
   return (
-    <h2 className="book-title">{book.name}</h2>
+    <BookDetail book={book} loading={loading} error={error} />
   )
 }
 

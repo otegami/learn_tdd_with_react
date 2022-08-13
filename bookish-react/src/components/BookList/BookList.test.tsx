@@ -24,8 +24,8 @@ describe('BookList', () => {
   it('render books', async () => {
     const props = {
       books: [
-        { 'name': 'Refactoring', 'id': 1 },
-        { 'name': 'Domain-driven design', 'id': 2 }
+        { 'name': 'Refactoring', 'description': 'good content', 'id': 1 },
+        { 'name': 'Domain-driven design', 'description': 'good content', 'id': 2 }
       ],
       loading: false,
       error: false

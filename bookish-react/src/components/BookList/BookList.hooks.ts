@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
-import type { Book } from './BookList'
+import type { Book } from '../Book/BookDetail'
 
 export const useBookList = (initial: Book[]) => {
   const [books, setBooks] = useState<Book[]>(initial)

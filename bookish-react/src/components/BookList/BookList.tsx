@@ -1,7 +1,6 @@
-export type Book = {
-  id: number
-  name: string
-}
+import { Button, Card, CardActionArea, CardActions, CardContent, Grid, Typography } from "@material-ui/core"
+import { Link } from "react-router-dom"
+import { Book } from "../Book/BookDetail"
 
 type Props = {
   books: Book[]
