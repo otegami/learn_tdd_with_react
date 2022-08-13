@@ -1,4 +1,4 @@
-import { Button, Card, CardActionArea, CardActions, CardContent, Grid, Typography } from "@material-ui/core"
+import { Button, Card, CardActionArea, CardActions, CardContent, Grid, makeStyles, Typography } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { Book } from "../Book/BookDetail"
 
@@ -8,12 +8,35 @@ type Props = {
   error: boolean
 }
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary
+  },
+  name: {
+    maxHeight: 30,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+  },
+  description: {
+    maxHeight: 40,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+  }
+}))
+
 const BookList: React.FC<Props> = ({ books, loading, error }) => {
+  const classes = useStyles()
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error!</p>
 
   return (
-    <div data-test="book-list">
+    <div data-test="book-list" className={classes.root}>
       <Grid container spacing={3} >
         {
           books.map((book) => (
@@ -21,10 +44,10 @@ const BookList: React.FC<Props> = ({ books, loading, error }) => {
               <Card>
                 <CardActionArea>
                   <CardContent>
-                    <Typography gutterBottom variant='h5' component='h2'>
+                    <Typography gutterBottom variant='h5' component='h2' className={classes.name}>
                       {book.name}
                     </Typography>
-                    <Typography variant='body2' color='textSecondary' component='p'>
+                    <Typography variant='body2' color='textSecondary' component='p' className={classes.description}>
                       {book.description}
                     </Typography>
                   </CardContent>
