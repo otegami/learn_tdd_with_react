@@ -23,5 +23,19 @@ describe('BookDetail', () => {
     expect(description).toBeInTheDocument()
   })
 
+  it('displays the book name when no description was given', async () => {
+    const props = {
+      book: {
+        id: 1,
+        name: 'Refactoring',
+        description: undefined
+      },
+      loading: false,
+      error: false,
+    }
 
+    render(<BookDetail {...props} />)
+    const descriptionElement = await screen.findByTestId('book-description')
+    expect(descriptionElement).toBeInTheDocument()
+  })
 })

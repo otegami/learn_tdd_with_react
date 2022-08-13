@@ -1,7 +1,9 @@
+import BookList from "../BookList/BookList"
+
 export type Book = {
   id: number
   name: string
-  description: string
+  description: string | undefined
 }
 
 type Props = {
@@ -17,7 +19,9 @@ const BookDetail: React.FC<Props> = ({ book, loading, error }) => {
   return (
     <>
       <h2 className="book-title">{book.name}</h2>
-      <p className="book-description">{book.description}</p>
+      <p className="book-description" data-testid="book-description">
+        {book.description ?? book.name}
+      </p>
     </>
   )
 }

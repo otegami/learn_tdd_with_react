@@ -1,12 +1,13 @@
 import { render } from '@testing-library/react'
 import { screen } from '@testing-library/dom'
 import BookList from './BookList'
+import { MemoryRouter } from 'react-router-dom'
 
 describe('BookList', () => {
   it('loading', async () => {
     const props = { books: [], loading: true, error: false }
 
-    render(<BookList {...props} />)
+    render(<MemoryRouter><BookList {...props} /></MemoryRouter>)
 
     const loadingElement = await screen.findByText(/Loading.../)
     expect(loadingElement).toBeInTheDocument()
@@ -15,7 +16,7 @@ describe('BookList', () => {
   it('error', async () => {
     const props = { books: [], loading: false, error: true }
 
-    render(<BookList {...props} />)
+    render(<MemoryRouter><BookList {...props} /></MemoryRouter>)
 
     const errorElement = await screen.findByText(/Error!/)
     expect(errorElement).toBeInTheDocument()
@@ -31,7 +32,7 @@ describe('BookList', () => {
       error: false
     }
 
-    render(<BookList {...props} />)
+    render(<MemoryRouter><BookList {...props} /></MemoryRouter>)
     const titleElements = [
       await screen.findByText(/Refactoring/),
       await screen.findByText(/Domain-driven design/)
