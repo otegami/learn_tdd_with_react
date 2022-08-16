@@ -40,7 +40,7 @@ const BookList: React.FC<Props> = ({ books, loading, error }) => {
       <Grid container spacing={3} >
         {
           books.map((book) => (
-            <Grid item xs={4} sm={4} key={book.id} className='book-teim'>
+            <Grid item xs={4} sm={4} key={book.id} className='book-item'>
               <Card>
                 <CardActionArea>
                   <CardContent>
