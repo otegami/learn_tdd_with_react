@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import type { Book } from '../Book/BookDetail'
 
-export const useBookList = (initial: Book[]) => {
+export const useBookList = (initial: Book[], searchParam: string) => {
   const [books, setBooks] = useState<Book[]>(initial)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -13,7 +13,7 @@ export const useBookList = (initial: Book[]) => {
       setLoading(true)
 
       try {
-        const res: AxiosResponse<Book[], unknown> = await axios('http://localhost:8080/books?_sort=id&_order=asc')
+        const res: AxiosResponse<Book[], unknown> = await axios(`http://localhost:8080/books?_sort=id&_order=asc&q=${searchParam}`)
         setBooks(res.data)
       } catch (e) {
         setError(true)
@@ -23,7 +23,7 @@ export const useBookList = (initial: Book[]) => {
     }
 
     fetchBooks()
-  }, [])
+  }, [searchParam])
 
   return { books, loading, error }
 }
