@@ -1,21 +1,18 @@
 import { useBookList } from "./BookList.hooks"
 import BookList from "./BookList"
-import { TextField } from "@material-ui/core"
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
+import SearchBox from "../SearchBox/SearchBox"
 
 const BookListContainer = () => {
   const [term, setTerm] = useState('')
   const { books, loading, error } = useBookList([], term)
+  const onSearch = (event: ChangeEvent<HTMLInputElement>) => setTerm(event.target.value)
 
   return (
     <>
-      <TextField
-        label='Search'
-        data-test='search'
-        value={term}
-        onChange={(e) => setTerm(e.target.value)}
-        margin='normal'
-        variant='outlined'
+      <SearchBox
+        term={term}
+        onSearch={onSearch}
       />
       <BookList books={books} loading={loading} error={error} />
     </>
