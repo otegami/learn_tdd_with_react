@@ -32,6 +32,9 @@ export const feedStubBooks = () => {
 };
 
 describe('Bookish application', () => {
+  const gotoApp = () => {
+    cy.visit('http://localhost:3000/')
+  }
   beforeEach(() => {
     feedStubBooks()
     cy.wait(500)
@@ -42,12 +45,12 @@ describe('Bookish application', () => {
   })
 
   it('Visits the bookish', () => {
-    cy.visit('http://localhost:3000/')
+    gotoApp()
     cy.get('h2[data-test="heading"]').contains('Bookish')
   })
 
   it('Show a book list', () => {
-    cy.visit('http://localhost:3000/')
+    gotoApp()
     cy.get('div[data-test="book-list"]').should('exist')
     cy.wait(1)
     cy.get('div.book-item').should((books) => {
@@ -59,7 +62,7 @@ describe('Bookish application', () => {
   })
 
   it('Goes to the detail page', () => {
-    cy.visit('http://localhost:3000/')
+    gotoApp()
     cy.get('div.book-item').contains('View Details').eq(0).click()
 
     cy.url().should('include', '/books/1')
@@ -67,7 +70,7 @@ describe('Bookish application', () => {
   })
 
   it('Searches for a title', () => {
-    cy.visit('http://localhost:3000/')
+    gotoApp()
     cy.get('div.book-item').should('have.length', 4)
 
     cy.get('div[data-test="search"]').type('design')
