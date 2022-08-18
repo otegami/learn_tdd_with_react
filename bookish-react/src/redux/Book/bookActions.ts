@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FETCH_BOOKS_FAILED, FETCH_BOOKS_PENDING, FETCH_BOOKS_SUCCESS } from "../types/bookTypes"
+import { FETCH_BOOKS_FAILED, FETCH_BOOKS_PENDING, FETCH_BOOKS_SUCCESS } from "./bookTypes"
 
 export const setSearchTerm = (term: string) => {
   return { type: 'SET_SEARCH_TERM', term }
