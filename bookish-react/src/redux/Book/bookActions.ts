@@ -6,9 +6,11 @@ export const setSearchTerm = (term: string) => {
 }
 
 export const fetchBooks = (term: string) => {
-  return (dispacth) => {
+  return (dispacth, getState) => {
     dispacth({ type: FETCH_BOOKS_PENDING })
-    return axios.get(`http://localhost:8080/books?q=${term}`)
+    const state = getState()
+
+    return axios.get(`http://localhost:8080/books?q=${state.term}`)
       .then((res) => {
         dispacth({ type: FETCH_BOOKS_SUCCESS, books: res.data })
       })
