@@ -1,24 +1,29 @@
-import { configureStore } from "@reduxjs/toolkit"
-import { applyMiddleware, compose, createStore } from "redux"
-import thunk from "redux-thunk"
-import bookReducer, { initState } from "./bookReducer"
+import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { useDispatch } from 'react-redux'
+import { Book } from "../../components/Book/BookDetail"
 
-const middlewares = [thunk]
+export type BookState = { loading: boolean, books: Book[], term: string }
+export const initialState: BookState = {
+  loading: false,
+  books: [],
+  term: ''
+}
 
-const composeEnhancers = compose(applyMiddleware(...middlewares))
-const bookStore = createStore(
-  bookReducer,
-  initState,
-  composeEnhancers
-)
-
-export default bookStore
-
-const store = configureStore({
-  reducer: {
-    books: bookReducer,
+export const bookSlice = createSlice({
+  name: 'book',
+  initialState,
+  reducers: {
+    fetched: (state, action: PayloadAction<Book[]>) => ({
+      ...state,
+      books: action.payload
+    }),
+    loaded: (state) => ({ ...state, loading: true }),
+    failed: () => ({ ...initialState })
   }
 })
 
+const store = configureStore({ reducer: bookSlice.reducer })
+
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
+export const useAppDispatch: () => AppDispatch = useDispatch

@@ -1,25 +1,22 @@
+import { createReducer, PayloadAction } from "@reduxjs/toolkit";
 import { Book } from "../../components/Book/BookDetail";
-import { FETCH_BOOKS_PENDING, FETCH_BOOKS_SUCCESS } from "./bookTypes";
+import { failed, fetched, loaded } from "./bookActions";
 
-export type PendingAction = { type: typeof FETCH_BOOKS_PENDING }
-export type SucessAction = { type: typeof FETCH_BOOKS_SUCCESS, books: Book[] }
-type Actions = PendingAction | SucessAction
-
-export type State = { loading: boolean, books: Book[], term: string }
-export const initState: State = {
+export type BookState = { loading: boolean, books: Book[], term: string }
+export const initialState: BookState = {
   loading: false,
   books: [],
   term: ''
 }
-const bookReducer = (state = initState, action: Actions): State => {
-  switch (action.type) {
-    case FETCH_BOOKS_PENDING:
-      return { ...state, loading: true }
-    case FETCH_BOOKS_SUCCESS:
-      return { ...state, books: action.books, loading: false }
-    default:
-      return state
-  }
-}
+
+export const bookReducer = createReducer(initialState, {
+  [fetched.type]: (state, action: PayloadAction<Book[]>) => ({
+    ...state,
+    books: action.payload
+  }),
+  [loaded.type]: (state) => ({ ...state, loading: true }),
+  [failed.type]: () => ({ ...initialState })
+})
 
 export default bookReducer
+

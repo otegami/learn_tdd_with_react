@@ -1,4 +1,6 @@
+import { createAction } from "@reduxjs/toolkit"
 import axios from "axios"
+import { Book } from "../../components/Book/BookDetail"
 import { FETCH_BOOKS_FAILED, FETCH_BOOKS_PENDING, FETCH_BOOKS_SUCCESS } from "./bookTypes"
 
 export const setSearchTerm = (term: string) => {
@@ -19,3 +21,8 @@ export const fetchBooks = (term: string) => {
       })
   }
 }
+
+const FEATURE = 'book'
+export const fetched = createAction<Book[]>(`${FEATURE}/fetched`)
+export const loaded = createAction(`${FEATURE}/loaded`)
+export const failed = createAction(`${FEATURE}/failed`)
